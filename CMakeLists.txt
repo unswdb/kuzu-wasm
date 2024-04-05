@@ -1,19 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
-project(NewKuzu)
+project(KUZU-WASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 if (EMSCRIPTEN)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sUSE_PTHREADS=1")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mbulk-memory -DWEBDB_BULK_MEMORY=1")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sUSE_PTHREADS=1")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mbulk-memory -DWEBDB_BULK_MEMORY=1")
     add_compile_options("SHELL:-s USE_PTHREADS")
     add_link_options("SHELL:-s USE_PTHREADS")
 endif()
 
 add_subdirectory(kuzu)
-
-# include_directories("/Users/gaogao/github/emsdk/upstream/emscripten/system/include")
 
 include_directories(lib)
 
