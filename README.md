@@ -5,13 +5,11 @@ Make sure you have installed:
 2. [Emscripten](https://emscripten.org/docs/getting_started/downloads.html)
 
 ## Download kuzu
-So far, `v0.4.0` is the latest release version of kuzu. 
+So far, `v0.4.1` is the latest release version of kuzu. 
 For development consistency, I recommend that everyone use the same version
 ```
 cd kuzu-wasm
-curl -LJO https://github.com/kuzudb/kuzu/archive/refs/tags/v0.4.0.zip
-unzip -q kuzu-0.4.0.zip && rm kuzu-0.4.0.zip
-mv kuzu-0.4.0 kuzu
+git submodule update --init
 ```
 
 ## Build command
@@ -24,6 +22,11 @@ chmod 755 build.sh
 chmod 755 run.sh
 ./run.sh
 ```
+## Update kuzu
+```
+git submodule update --remote
+```
+
 ## Simple test 
 ```
 var database = new Module.WebDatabase("test",0,4,false,false,4194304*16)
