@@ -16,9 +16,9 @@ bool WebQueryResult::hasNext() {
 std::string WebQueryResult::toString() {
     return queryResult->toString();
 }
-std::string WebQueryResult::toSingleQueryString() {
-    return queryResult->toSingleQueryString();
-}
+// std::string WebQueryResult::toSingleQueryString() {
+//     return queryResult->toSingleQueryString();
+// }
 
 // val WebQueryResult::getNext() {
 //     auto tuple = queryResult->getNext();

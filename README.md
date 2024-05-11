@@ -5,13 +5,13 @@ Make sure you have installed:
 2. [Emscripten](https://emscripten.org/docs/getting_started/downloads.html)
 
 ## Download kuzu
-So far, `v0.3.2` is the latest release version of kuzu. 
+So far, `v0.4.0` is the latest release version of kuzu. 
 For development consistency, I recommend that everyone use the same version
 ```
 cd kuzu-wasm
-curl -LJO https://github.com/kuzudb/kuzu/archive/refs/tags/v0.3.2.zip
-unzip -q kuzu-0.3.2.zip && rm kuzu-0.3.2.zip
-mv kuzu-0.3.2 kuzu
+curl -LJO https://github.com/kuzudb/kuzu/archive/refs/tags/v0.4.0.zip
+unzip -q kuzu-0.4.0.zip && rm kuzu-0.4.0.zip
+mv kuzu-0.4.0 kuzu
 ```
 
 ## Build command

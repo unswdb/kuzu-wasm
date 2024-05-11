@@ -50,7 +50,6 @@ EMSCRIPTEN_BINDINGS(WebQueryResult) {
         .function("getExecutionTime", &WebQueryResult::getExecutionTime)
         .function("getCompilingTime", &WebQueryResult::getCompilingTime)
         .function("toString", &WebQueryResult::toString)
-        .function("toSingleQueryString", &WebQueryResult::toSingleQueryString)
         .function("getNumTuples", &WebQueryResult::getNumTuples);
         //         .function("getNext", &WebQueryResult::getNext)
 }

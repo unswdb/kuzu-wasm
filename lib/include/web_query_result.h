@@ -28,7 +28,7 @@ public:
 
     static val convertValueToJsObject(const kuzu::common::Value& value);
 
-    std::string toSingleQueryString();
+    // std::string toSingleQueryString();
 
     std::string toString();
 
