@@ -11,6 +11,10 @@ For development consistency, I recommend that everyone use the same version
 cd kuzu-wasm
 git submodule update --init
 ```
+Or you can download recursively
+```
+git clone git@github.com:DylanShang/kuzu-wasm.git --recursive
+```
 
 ## Build command
 ```
