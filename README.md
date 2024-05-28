@@ -5,7 +5,7 @@ Make sure you have installed:
 2. [Emscripten](https://emscripten.org/docs/getting_started/downloads.html)
 
 ## Download kuzu
-So far, `v0.4.1` is the latest release version of kuzu. 
+So far, `v0.4.2` is the latest release version of kuzu. 
 For development consistency, I recommend that everyone use the same version
 ```
 cd kuzu-wasm

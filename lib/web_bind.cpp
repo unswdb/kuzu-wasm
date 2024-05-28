@@ -22,13 +22,13 @@ EMSCRIPTEN_BINDINGS(WebConnection) {
     class_<WebConnection>("WebConnection")
         .constructor<WebDatabase*, uint64_t>()
         .function("setQueryTimeout", &WebConnection::setQueryTimeout)
-        .function("prepare", &WebConnection::prepare)
         .function("setMaxNumThreadForExec", &WebConnection::setMaxNumThreadForExec)
         .function("getNumNodes", &WebConnection::getNumNodes)
         .function("getNumRels", &WebConnection::getNumRels)
         .function("query", &WebConnection::query)
         .function("execute", &WebConnection::execute,allow_raw_pointers());
 }
+// .function("prepare", &WebConnection::prepare)
 
 EMSCRIPTEN_BINDINGS(WebPreparedStatement) {
     class_<WebPreparedStatement>("WebPreparedStatement")

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(KUZU-WASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s DISABLE_EXCEPTION_CATCHING=0")
 
 if (EMSCRIPTEN)
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
@@ -33,7 +34,7 @@ set_target_properties(
     -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
     -lembind \
     -sASSERTIONS=1 \
-    -sSAFE_HEAP=1 \
+    -sSAFE_HEAP=2 \
     -g \
     -sNO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../kuzu/dataset/demo-db/csv \
