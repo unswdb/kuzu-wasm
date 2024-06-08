@@ -22,6 +22,7 @@ wasm_relperf: check_environment ## Compile kuzu-wasm in relperf mode
 # 				packages/kuzu-wasm/src/kuzu-wasm.worker.mjs)
 .PHONY: wasm_package
 wasm_package: wasm_relperf ## Package kuzu-wasm
+	mkdir -p packages/kuzu-wasm/src
 	cp build/relperf/kuzu-wasm.* packages/kuzu-wasm/src/
 
 .PHONY: shell 
