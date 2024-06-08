@@ -1,0 +1,14 @@
+{
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+    },
+    "devDependencies": {
+    }
+}

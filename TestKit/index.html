@@ -10,25 +10,32 @@
 <body>
     <input type="file" id="fileInput" />
     <button onclick="uploadFile()">Upload File</button>
-    <script src="main.js" type="text/javascript"></script>
+    <!-- <script src="main.js" type="text/javascript"></script> -->
 </body>
 <script>
     function uploadFile() {
     var fileInput = document.getElementById('fileInput');
-    var file = fileInput.files[0]; // 获取用户选择的文件
+    var file = fileInput.files[0]; // get choosen file
     if (file) {
         var reader = new FileReader();
         reader.onload = function(event) {
-            var fileData = new Uint8Array(event.target.result); // 将文件数据转换为 Uint8Array 格式
-            var fileName = file.name; // 获取用户选择的文件的名称
+            var fileData = new Uint8Array(event.target.result); // transfer to Uint8Array
+            var fileName = file.name; // get path from user
             var filePath = fileName;
-            FS.writeFile(filePath, fileData); // 将文件数据写入 Emscripten 文件系统中的指定路径
+            FS.writeFile(filePath, fileData); 
             console.log('File uploaded successfully!');
         };
-        reader.readAsArrayBuffer(file); // 读取文件数据
+        reader.readAsArrayBuffer(file); // read data
     } else {
         console.error('No file selected!');
     }
 }
+</script>
+<script type="module">
+    import Kuzu from './kuzu-wasm.js'
+    Kuzu().then((module) => {
+        window.kuzu = module
+        console.log("kuzu is ready to use!")
+    })
 </script>
 </html>

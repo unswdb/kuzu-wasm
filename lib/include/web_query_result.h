@@ -48,6 +48,8 @@ public:
 
     size_t getNumTuples();
 
+    std::string printExecutionResult();
+
 private:
     std::unique_ptr<QueryResult> queryResult;
 };

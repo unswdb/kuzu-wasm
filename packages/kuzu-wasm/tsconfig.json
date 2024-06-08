@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "target": "ES2015",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "declaration": true,
+    "declarationMap": false,
+    "declarationDir": "./dist/types/",
+  },
+  "include": [
+    "src/**/*",
+    "kuzu-wasm.d.ts"  // Add this line to include your custom declaration file
+  ]
+}

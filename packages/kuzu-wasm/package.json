@@ -1,0 +1,16 @@
+{
+  "name": "@kuzu/kuzu-wasm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/kuzu-wasm.js",
+  "module": "src/kuzu-wasm.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
