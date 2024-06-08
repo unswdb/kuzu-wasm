@@ -1,0 +1,43 @@
+name: 'shell'
+on:
+  workflow_dispatch:  
+  push:
+    branches:
+      - main
+  pull_request:
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: Setup Emscripten toolchain
+      uses: mymindstorm/setup-emsdk@v14
+
+    - uses: actions/setup-node@v4
+      with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+    - run: npm install -g yarn
+    - name: Build Shell Project
+      run: |
+        make shell
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: packages/kuzu-shell/dist
+            
+
+
