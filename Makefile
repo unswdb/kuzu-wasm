@@ -28,18 +28,20 @@ wasm_relperf: $(wasm_relperf_target) ## Compile kuzu-wasm in relperf mode
 
 .PHONY: package
 package: $(wasm_relperf_target) ## Package kuzu-wasm
+	yarn
+	yarn install
 	cp build/relperf/kuzu-wasm.* packages/kuzu-wasm/src/
-	yarn workspace @kuzu/kuzu-wasm build:debug
+	yarn workspace @kuzu/kuzu-wasm build:release
 
 .PHONY: package_dev 
 package_dev: $(wasm_dev_target) ## Package kuzu-wasm in dev mode
+	yarn
+	yarn install
 	cp build/dev/kuzu-wasm.* packages/kuzu-wasm/src/
-	yarn workspace @kuzu/kuzu-wasm build:release
+	yarn workspace @kuzu/kuzu-wasm build:debug
 
 .PHONY: shell 
 shell: package ## Build kuzu-shell application
-	yarn
-	yarn install
 	yarn workspace @kuzu/kuzu-shell build:release
 
 .PHONY: shell_dev 
