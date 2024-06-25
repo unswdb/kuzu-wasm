@@ -1,2 +1,5 @@
 node_modules/
-src/
+dist/
+src/kuzu-wasm.js
+src/kuzu-wasm.wasm
+src/kuzu-wasm.worker.mjs

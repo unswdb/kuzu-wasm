@@ -107,6 +107,16 @@ size_t WebQueryResult::getNumTuples() {
     return queryResult->getNumTuples();
 }
 
+double WebQueryResult::getArrowSchema(){
+    resultSchema = queryResult->getArrowSchema();
+    return reinterpret_cast<uintptr_t>(resultSchema.get());
+}
+
+double WebQueryResult::getArrowChunk(){
+    int64_t chunkSize = getNumTuples();
+    resultArray = queryResult->getNextArrowChunk(chunkSize);
+    return reinterpret_cast<uintptr_t>(resultArray.get());
+}
 
 std::string WebQueryResult::printExecutionResult() {
 

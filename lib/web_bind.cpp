@@ -10,6 +10,7 @@ using namespace kuzu::main;
 
 int main(){return 0;}
 
+
 EMSCRIPTEN_BINDINGS(WebDatabase) {
     class_<WebDatabase>("WebDatabase")
         .constructor<const std::string&, uint64_t, uint64_t, bool, bool, uint64_t>()
@@ -25,10 +26,10 @@ EMSCRIPTEN_BINDINGS(WebConnection) {
         .function("setMaxNumThreadForExec", &WebConnection::setMaxNumThreadForExec)
         .function("getNumNodes", &WebConnection::getNumNodes)
         .function("getNumRels", &WebConnection::getNumRels)
-        .function("query", &WebConnection::query)
-        .function("execute", &WebConnection::execute,allow_raw_pointers());
+        .function("query", &WebConnection::query);
+        // .function("prepare", &WebConnection::prepare)
+        // .function("execute", &WebConnection::execute,allow_raw_pointers());
 }
-// .function("prepare", &WebConnection::prepare)
 
 EMSCRIPTEN_BINDINGS(WebPreparedStatement) {
     class_<WebPreparedStatement>("WebPreparedStatement")
@@ -51,7 +52,12 @@ EMSCRIPTEN_BINDINGS(WebQueryResult) {
         .function("getCompilingTime", &WebQueryResult::getCompilingTime)
         .function("toString", &WebQueryResult::toString)
         .function("printExecutionResult", &WebQueryResult::printExecutionResult)
+        .function("getArrowChunk", &WebQueryResult::getArrowChunk)
+        .function("getArrowSchema", &WebQueryResult::getArrowSchema)
         .function("getNumTuples", &WebQueryResult::getNumTuples);
         //         .function("getNext", &WebQueryResult::getNext)
+
 }
+
+
 // register_vector<std::string>("VectorString");

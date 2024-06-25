@@ -1,16 +1,41 @@
 {
   "name": "@kuzu/kuzu-wasm",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/kuzu-wasm.js",
-  "module": "src/kuzu-wasm.js",
-  "scripts": {
-  },
-  "keywords": [],
-  "author": "",
+  "version": "1.0.4",
+  "author": "DylanShang",
   "license": "MIT",
+  "description": "Kuzu powered by WebAssembly",
+  "main": "dist/kuzu.js",
+  "module": "dist/kuzu.js",
+  "unpkg": "dist/kuzu.js",
+  "scripts": {
+    "build:debug": "node bundle.mjs debug && cp src/kuzu-wasm.* dist/",
+    "build:release": "node bundle.mjs release && cp src/kuzu-wasm.* dist/"
+  },
+  "keywords": [
+    "cypher",
+    "kuzu",
+    "graph",
+    "database",
+    "data",
+    "query",
+    "wasm",
+    "analytics",
+    "olap",
+    "arrow",
+    "parquet",
+    "json",
+    "csv"
+  ],
   "devDependencies": {
+    "esbuild": "^0.21.5"
   },
   "dependencies": {
-  }
+    "apache-arrow": "^16.1.0",
+    "arrow-js-ffi": "^0.4.2"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }

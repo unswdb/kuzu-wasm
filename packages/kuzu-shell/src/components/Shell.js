@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
-import Kuzu from '@kuzu/kuzu-wasm';
+import kuzu_wasm from '@kuzu/kuzu-wasm';
 
 
 
@@ -106,7 +106,7 @@ const Shell = () => {
       let database = null;
       let connection = null;
       if (!UI_debug) {
-        Kuzu().then((module) => {
+        kuzu_wasm().then((module) => {
           kuzu = module;
           window.kuzu = kuzu
           kuzu.FS.mkdir("data")

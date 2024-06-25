@@ -10,7 +10,6 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Cross-Origin-Opener-Policy', 'same-origin')
         super().end_headers()
 
-# 使用不同的端口以避免与现有进程冲突
 PORT = 8000
 
 with socketserver.TCPServer(("", PORT), MyHandler) as httpd:

@@ -6,9 +6,9 @@ if [ ! -e "build/dev/" ];then
 fi
 
 if [ ! -f "build/dev/index.html" ] || [ ! -f "build/dev/http_server.py" ]; then
-    cp TestKit/index.html build/dev/
-    cp TestKit/http_server.py build/dev/
-    echo "Copied index.html and http_server.py from TestKit to build directory."
+    cp test/index.html build/dev/
+    cp test/http_server.py build/dev/
+    echo "Copied index.html and http_server.py from test to build directory."
 fi
 
 cd build/dev && python3 http_server.py

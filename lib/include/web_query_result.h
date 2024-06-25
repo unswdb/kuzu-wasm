@@ -50,6 +50,14 @@ public:
 
     std::string printExecutionResult();
 
+    double getArrowSchema();
+
+    double getArrowChunk();
+
 private:
     std::unique_ptr<QueryResult> queryResult;
+
+    std::unique_ptr<ArrowSchema> resultSchema;
+
+    std::unique_ptr<ArrowArray> resultArray;
 };

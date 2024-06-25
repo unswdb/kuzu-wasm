@@ -13,11 +13,8 @@ if (EMSCRIPTEN)
 endif()
 
 add_subdirectory(kuzu)
-
 include_directories(lib)
-
 add_executable(kuzu-wasm lib/web_bind.cpp lib/web_database.cpp lib/web_connection.cpp lib/web_prepared_statement.cpp lib/web_query_result.cpp)
-
 target_link_libraries(kuzu-wasm kuzu)
 
 # Release build
@@ -66,7 +63,7 @@ set_target_properties(
     -s MODULARIZE=1 -s EXPORT_NAME='Kuzu' -s EXPORT_ES6=1 \
     -sNO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../../kuzu/dataset/demo-db/ \
-    -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\"]' \
+    -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
     ")
 
     # --emit-tsd 'interface.d.ts' \
