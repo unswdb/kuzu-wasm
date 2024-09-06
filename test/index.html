@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Emscripten examples - Hello World</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 </head>
 
 <body>
     <input type="file" id="fileInput" />
     <button onclick="uploadFile()">Upload File</button>
-    <!-- <script src="main.js" type="text/javascript"></script> -->
 </body>
 <script>
     function uploadFile() {
@@ -31,11 +31,12 @@
     }
 }
 </script>
-<script type="module">
-    import Kuzu from './kuzu-wasm.js'
-    Kuzu().then((module) => {
-        window.kuzu = module
-        console.log("kuzu is ready to use!")
+<script>
+    require(['./kuzu-wasm.esm.js'], function(kuzu_wasm) {
+      kuzu_wasm().then((kuzu)=>{
+      console.log(kuzu)
+      window.kuzu = kuzu
     })
+  });
 </script>
 </html>

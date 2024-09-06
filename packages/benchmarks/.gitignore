@@ -1,0 +1,4 @@
+/node_modules
+/dist
+*.d.ts.map
+benchmark_report.md

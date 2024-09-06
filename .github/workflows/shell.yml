@@ -33,6 +33,7 @@ jobs:
     - name: Build Shell Project
       run: |
         make shell
+        make benchmark
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0
       with:

@@ -148,12 +148,12 @@ const Shell = () => {
           let commandList = commands.split(';');
           commandList.forEach((cmd) => {
             cmd = cmd.trim();
-            console.log("exec:",cmd);
+            // console.log("exec:",cmd);
             if (cmd != '') {
               if (cmd.startsWith('#') || cmd.startsWith('//')) return;
               let result = connection.query(cmd);
               let text = result.printExecutionResult().replace(/\r?\n/g, '\r\n')
-              console.log(`${result.toString()}`)
+              // console.log(`${result.toString()}`)
               kuzuTerm.writeln(`\r\n${text}`);
             }
           });
@@ -167,7 +167,7 @@ const Shell = () => {
       }
       kuzuTerm.onKey(({ key, domEvent }) => {
         const printable = !domEvent.altKey && !domEvent.altGraphKey && !domEvent.ctrlKey && !domEvent.metaKey;
-        console.log(domEvent.key)
+        // console.log(domEvent.key)
         if (domEvent.key === 'Enter') {
           const inputString = kuzuTerm.buffer.active.getLine(0)?.translateToString().trim();
           //get current line
@@ -176,7 +176,7 @@ const Shell = () => {
             let file_list = window.kuzu.FS.readdir('data').filter(e => e !== '.' && e !== '..')
             //print file list
             if (file_list.length != 0) kuzuTerm.write('\r\n' + file_list.join(' '))
-            console.log(file_list)
+            // console.log(file_list)
           } else if (currentLineContent == "upload") {
             fileInputRef.current.click();
           }
@@ -210,10 +210,10 @@ const Shell = () => {
           // console.log("write", key)
           let cur_line = getCurrentLineContent();
           if (key.trim() == "") return;
-          console.log("after insert",cur_line)
+          // console.log("after insert",cur_line)
           let word = cur_line.split(" ").pop()
-          console.log(word)
-          console.log(cur_line.split(" "))
+          // console.log(word)
+          // console.log(cur_line.split(" "))
           // repaint the last word
           for (let i = 0; i < word.length; i++) {
             kuzuTerm.write('\b \b');
@@ -228,7 +228,7 @@ const Shell = () => {
           }else{
             kuzuTerm.write('\x1b[0m')
             kuzuTerm.write(word);
-            console.log(word)
+            // console.log(word)
           }
 
         }

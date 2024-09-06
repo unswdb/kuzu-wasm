@@ -1,9 +1,9 @@
 import {parseData, parseField, parseRecordBatch, parseSchema, parseTable, parseVector} from './arrow-js-ffi.es.mjs'
 import {tableToIPC} from 'apache-arrow'
-import Kuzu from './kuzu-wasm.js';
+import * as kuzu from '../dist/kuzu-wasm.esm.js';
 
 var kuzu_wasm = async function initializeKuzu() {
-    let module = await Kuzu();
+    let module = await kuzu.default();
     module.Database = (...args) => initializeWebDatabase(module, ...args);
     module.Connection = (...args) => initializeWebConnection(module, ...args);
     return module;

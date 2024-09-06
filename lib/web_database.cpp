@@ -7,7 +7,7 @@
 using namespace kuzu::common;
 
 std::string WebDatabase::getVersion() {
-    return Version::getVersion();
+    return std::string(Version::getVersion());
 }
 
 uint64_t WebDatabase::getStorageVersion() {

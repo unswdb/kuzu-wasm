@@ -42,6 +42,12 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
   endif()
 endif()
 
+# Set environment
+if(WASM_WEB)
+  set(WASM_LINK_FLAGS "${WASM_LINK_FLAGS} -s ENVIRONMENT='web,webview,worker'  -s EXPORT_ES6=1")
+else()
+  set(WASM_LINK_FLAGS "${WASM_LINK_FLAGS} -s ENVIRONMENT='web,node,worker'")
+endif()
 
 message(STATUS "WASM_LINK_FLAGS=${WASM_LINK_FLAGS}")
 set_target_properties(
@@ -54,19 +60,21 @@ set_target_properties(
     -s MAXIMUM_MEMORY=4GB \
     -s ALLOW_BLOCKING_ON_MAIN_THREAD=1 \
     -s WARN_ON_UNDEFINED_SYMBOLS=0 \
-    -s PTHREAD_POOL_SIZE=navigator.hardwareConcurrency \
+    -s PTHREAD_POOL_SIZE=4 \
     -mbulk-memory -DWEBDB_BULK_MEMORY=1 \
     -sWASM_BIGINT \
     -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
     -lembind \
-    -s ENVIRONMENT='web,webview,worker' \
-    -s MODULARIZE=1 -s EXPORT_NAME='Kuzu' -s EXPORT_ES6=1 \
+    -s MODULARIZE=1 -s EXPORT_NAME='kuzu_wasm' \
     -sNO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../../kuzu/dataset/demo-db/ \
     -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
     ")
 
+    # --post-js ${CMAKE_SOURCE_DIR}/lib/postfix_module.js \
+    # --extern-pre-js ${CMAKE_SOURCE_DIR}/packages/kuzu-wasm/middleware/moduleArrow.js \
     # --emit-tsd 'interface.d.ts' \
     # -sUSE_PTHREADS=1 -sPTHREAD_POOL_SIZE=4 \
     # -s PTHREAD_POOL_SIZE_STRICT=0
     # -s PROXY_TO_PTHREAD \
+    # -s PTHREAD_POOL_SIZE=navigator.hardwareConcurrency \ this may cause problem in node

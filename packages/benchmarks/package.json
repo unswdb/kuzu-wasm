@@ -1,0 +1,14 @@
+{
+    "name": "@kuzu/benchmarks",
+    "version": "1.0.0",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "@kuzu/kuzu-wasm": "file:../kuzu-wasm",
+        "kuzu": "^0.4.2",
+        "neo4j-driver": "^5.22.0"
+    },
+    "scripts": {
+        "main": "node --enable-source-maps --max-old-space-size=4096 ./src/main.js"
+    }
+}

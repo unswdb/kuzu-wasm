@@ -14,13 +14,25 @@ if (args.length == 0) {
     await esbuild.build({
         entryPoints: ['src/index.js'],
         bundle: true,
-        outfile: 'dist/kuzu.js',
+        outfile: 'dist/kuzu-browser.js',
         platform: 'browser',
         format: 'esm',
         sourcemap: true,
         minify: !is_debug,
         sourcemap: is_debug ? 'inline' : true,
-        plugins: []
+        plugins: [],
+        external: ['../dist/kuzu-wasm.esm.js'],
+        // Replace the path to the same directory
+        plugins: [
+            {
+              name: 'replace-kuzu-path',
+              setup(build) {
+                build.onResolve({ filter: /..\/dist\/kuzu-wasm\.esm\.js$/ }, args => {
+                  return { path: './kuzu-wasm.esm.js', external: true };
+                });
+              }
+            }
+          ]
     });
     console.log('[ ESBUILD ] successfully bundled.');
 })();

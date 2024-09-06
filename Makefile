@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
+SOURCE_FILES := $(wildcard *.cpp) $(wildcard *.h)  CMakeLists.txt $(wildcard packages/kuzu-wasm/src/*.js)
 
-SOURCE_FILES := $(wildcard *.cpp) $(wildcard *.h)
 
 .PHONY: check_environment
 check_environment: ## check_environment
@@ -11,6 +11,7 @@ check_environment: ## check_environment
 .PHONY: wasm_dev 
 wasm_dev_target = build/dev/kuzu-wasm.wasm
 $(wasm_dev_target): $(SOURCE_FILES)
+	if [ ! -d "node_modules" ]; then yarn install; fi
 	./scripts/build_wasm.sh dev
 wasm_dev: $(wasm_dev_target) ## Compile kuzu-wasm in development mode
 
@@ -28,28 +29,33 @@ wasm_relperf: $(wasm_relperf_target) ## Compile kuzu-wasm in relperf mode
 
 .PHONY: package
 package: $(wasm_relperf_target) ## Package kuzu-wasm
-	yarn
-	yarn install
-	cp build/relperf/kuzu-wasm.* packages/kuzu-wasm/src/
-	yarn workspace @kuzu/kuzu-wasm build:release
+	mkdir -p packages/kuzu-wasm/dist
+	cp build/relperf/kuzu-wasm.* packages/kuzu-wasm/dist/
+	cp README.md packages/kuzu-wasm/
+	cp LICENSE.txt packages/kuzu-wasm/
+	if [ ! -d "node_modules" ]; then yarn install; fi
+	yarn workspace @kuzu/kuzu-wasm release
 
-.PHONY: package_dev 
-package_dev: $(wasm_dev_target) ## Package kuzu-wasm in dev mode
-	yarn
-	yarn install
-	cp build/dev/kuzu-wasm.* packages/kuzu-wasm/src/
-	yarn workspace @kuzu/kuzu-wasm build:debug
+.PHONY: package_dev
+package_dev: $(wasm_dev_target) ## Package kuzu-wasm
+	mkdir -p packages/kuzu-wasm/dist
+	cp build/dev/kuzu-wasm.* packages/kuzu-wasm/dist/
+	if [ ! -d "node_modules" ]; then yarn install; fi
+	yarn workspace @kuzu/kuzu-wasm debug
 
 .PHONY: shell 
 shell: package ## Build kuzu-shell application
 	yarn workspace @kuzu/kuzu-shell build:release
 
 .PHONY: shell_dev 
-shell_dev: package_dev ## Start kuzu-shell in development mode
+shell_dev:  ## Start kuzu-shell in development mode
 	yarn workspace @kuzu/kuzu-shell start
 
 dev: ## use kuzu_dev in plain html
 	./scripts/run.sh
+
+benchmark: package ## Run benchmark
+	yarn workspace @kuzu/benchmarks main
 
 .PHONY: clean
 clean:  ## Clean the repository
