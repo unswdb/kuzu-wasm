@@ -1,6 +1,13 @@
 .DEFAULT_GOAL := help
-SOURCE_FILES := $(wildcard *.cpp) $(wildcard *.h)  CMakeLists.txt $(wildcard packages/kuzu-wasm/src/*.js)
+SOURCE_FILES := $(shell find . -name '*.cpp' -o -name '*.h') CMakeLists.txt
 
+.PHONY: check-patch
+check-patch: ## Patch files
+	@cd kuzu && \
+	if git apply --check ../patches/*.patch > /dev/null 2>&1; then \
+		echo "Applying patches..."; \
+		git apply ../patches/*.patch; \
+	fi
 
 .PHONY: check_environment
 check_environment: ## check_environment
@@ -9,21 +16,20 @@ check_environment: ## check_environment
 	@echo "emcmake from: `which npm`"
 
 .PHONY: wasm_dev 
-wasm_dev_target = build/dev/kuzu-wasm.wasm
-$(wasm_dev_target): $(SOURCE_FILES)
-	if [ ! -d "node_modules" ]; then yarn install; fi
+wasm_dev_target = build/dev/kuzu-wasm.wasm 
+$(wasm_dev_target): $(SOURCE_FILES) check-patch
 	./scripts/build_wasm.sh dev
 wasm_dev: $(wasm_dev_target) ## Compile kuzu-wasm in development mode
 
 .PHONY: wasm_relsize 
 wasm_relsize_target := build/relsize/kuzu-wasm.wasm
-$(wasm_relsize_target):  $(SOURCE_FILES)
+$(wasm_relsize_target):  $(SOURCE_FILES) check-patch
 	./scripts/build_wasm.sh relsize
 wasm_relsize: $(wasm_relsize_target) ## Compile kuzu-wasm in development mode
 
 .PHONY: wasm_relperf
 wasm_relperf_target := build/relperf/kuzu-wasm.wasm 
-$(wasm_relperf_target): $(SOURCE_FILES)
+$(wasm_relperf_target): $(SOURCE_FILES) check-patch
 	./scripts/build_wasm.sh relperf
 wasm_relperf: $(wasm_relperf_target) ## Compile kuzu-wasm in relperf mode
 

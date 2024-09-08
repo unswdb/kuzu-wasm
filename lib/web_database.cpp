@@ -23,3 +23,7 @@ WebDatabase::WebDatabase(const std::string& databasePath, uint64_t bufferPoolSiz
 }
 
 WebDatabase::~WebDatabase() {}
+
+void WebDatabase::close() {
+    database.reset();
+}

@@ -12,60 +12,77 @@
 using namespace kuzu::common;
 using namespace kuzu::utf8proc;
 
+//To do: getNext
 
 bool WebQueryResult::hasNext() {
     return queryResult->hasNext();
 }
+
+bool WebQueryResult::hasNextQueryResult() {
+    return queryResult->hasNextQueryResult();
+}
+
+std::unique_ptr<WebQueryResult> WebQueryResult::getNextQueryResult() {
+    auto nextQueryResult = queryResult->getNextQueryResult();
+    auto webQueryResult = std::make_unique<WebQueryResult>();
+    webQueryResult->queryResult = std::unique_ptr<QueryResult>(nextQueryResult);
+    return webQueryResult;
+}
+
 std::string WebQueryResult::toString() {
     return queryResult->toString();
 }
 
+WebQueryResult::~WebQueryResult() {
+    close();
+}
 
 void WebQueryResult::close() {
     queryResult.reset();
 }
 
-val WebQueryResult::convertValueToJsObject(const Value& value) {
-    if (value.isNull()) {
-        return val::null();
-    }
-    auto dataType = value.getDataType();
-    switch (dataType->getLogicalTypeID()) {
-        case LogicalTypeID::BOOL:
-            return val(value.getValue<bool>());
-        case LogicalTypeID::INT8:
-            return val(value.getValue<int8_t>());
-        case LogicalTypeID::INT16:
-            return val(value.getValue<int16_t>());
-        case LogicalTypeID::INT32:
-            return val(value.getValue<int32_t>());
-        case LogicalTypeID::INT64:
-        case LogicalTypeID::SERIAL:
-            return val(value.getValue<int64_t>());
-        case LogicalTypeID::UINT8:
-            return val(value.getValue<uint8_t>());
-        case LogicalTypeID::UINT16:
-            return val(value.getValue<uint16_t>());
-        case LogicalTypeID::UINT32:
-            return val(value.getValue<uint32_t>());
-        case LogicalTypeID::UINT64:
-            return val(value.getValue<uint64_t>());
-        case LogicalTypeID::INT128: {
-            kuzu::common::int128_t result = value.getValue<kuzu::common::int128_t>();
-            std::string int128_string = kuzu::common::Int128_t::ToString(result);
-            return val(int128_string.c_str());
-        }
-        case LogicalTypeID::FLOAT:
-            return val(value.getValue<float>());
-        case LogicalTypeID::DOUBLE:
-            return val(value.getValue<double>());
-        case LogicalTypeID::STRING:
-            return val(value.getValue<std::string>());
-        // Other cases...
-        default:
-            throw NotImplementedException("Unsupported type: " + dataType->toString());
-    }
-}
+
+// val WebQueryResult::convertValueToJsObject(const Value& value) {
+//     if (value.isNull()) {
+//         return val::null();
+//     }
+//     auto dataType = value.getDataType();
+//     switch (dataType->getLogicalTypeID()) {
+//         case LogicalTypeID::BOOL:
+//             return val(value.getValue<bool>());
+//         case LogicalTypeID::INT8:
+//             return val(value.getValue<int8_t>());
+//         case LogicalTypeID::INT16:
+//             return val(value.getValue<int16_t>());
+//         case LogicalTypeID::INT32:
+//             return val(value.getValue<int32_t>());
+//         case LogicalTypeID::INT64:
+//         case LogicalTypeID::SERIAL:
+//             return val(value.getValue<int64_t>());
+//         case LogicalTypeID::UINT8:
+//             return val(value.getValue<uint8_t>());
+//         case LogicalTypeID::UINT16:
+//             return val(value.getValue<uint16_t>());
+//         case LogicalTypeID::UINT32:
+//             return val(value.getValue<uint32_t>());
+//         case LogicalTypeID::UINT64:
+//             return val(value.getValue<uint64_t>());
+//         case LogicalTypeID::INT128: {
+//             kuzu::common::int128_t result = value.getValue<kuzu::common::int128_t>();
+//             std::string int128_string = kuzu::common::Int128_t::ToString(result);
+//             return val(int128_string.c_str());
+//         }
+//         case LogicalTypeID::FLOAT:
+//             return val(value.getValue<float>());
+//         case LogicalTypeID::DOUBLE:
+//             return val(value.getValue<double>());
+//         case LogicalTypeID::STRING:
+//             return val(value.getValue<std::string>());
+//         // Other cases...
+//         default:
+//             throw NotImplementedException("Unsupported type: " + dataType->toString());
+//     }
+// }
 
 
 std::vector<std::string> WebQueryResult::getColumnDataTypes() {

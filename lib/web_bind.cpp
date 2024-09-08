@@ -14,9 +14,9 @@ int main(){return 0;}
 EMSCRIPTEN_BINDINGS(WebDatabase) {
     class_<WebDatabase>("WebDatabase")
         .constructor<const std::string&, uint64_t, uint64_t, bool, bool, uint64_t>()
-        .function("setLoggingLevel", &WebDatabase::setLoggingLevel)
         .class_function("getVersion", &WebDatabase::getVersion)
-        .class_function("getStorageVersion", &WebDatabase::getStorageVersion);
+        .class_function("getStorageVersion", &WebDatabase::getStorageVersion)
+        .function("close", &WebDatabase::close);
 }
 
 EMSCRIPTEN_BINDINGS(WebConnection) {
@@ -26,7 +26,8 @@ EMSCRIPTEN_BINDINGS(WebConnection) {
         .function("setMaxNumThreadForExec", &WebConnection::setMaxNumThreadForExec)
         .function("getNumNodes", &WebConnection::getNumNodes)
         .function("getNumRels", &WebConnection::getNumRels)
-        .function("query", &WebConnection::query);
+        .function("query", &WebConnection::query)
+        .function("close", &WebConnection::close);
         // .function("prepare", &WebConnection::prepare)
         // .function("execute", &WebConnection::execute,allow_raw_pointers());
 }
@@ -42,7 +43,6 @@ EMSCRIPTEN_BINDINGS(WebQueryResult) {
     class_<WebQueryResult>("WebQueryResult")
         .function("hasNext", &WebQueryResult::hasNext)
         .function("close", &WebQueryResult::close)
-        .class_function("convertValueToJsObject", &WebQueryResult::convertValueToJsObject)
         .function("getColumnDataTypes", &WebQueryResult::getColumnDataTypes)
         .function("getColumnNames", &WebQueryResult::getColumnNames)
         .function("resetIterator", &WebQueryResult::resetIterator)
@@ -54,8 +54,11 @@ EMSCRIPTEN_BINDINGS(WebQueryResult) {
         .function("printExecutionResult", &WebQueryResult::printExecutionResult)
         .function("getArrowChunk", &WebQueryResult::getArrowChunk)
         .function("getArrowSchema", &WebQueryResult::getArrowSchema)
+        .function("hasNextQueryResult", &WebQueryResult::hasNextQueryResult)
+        .function("getNextQueryResult", &WebQueryResult::getNextQueryResult)
         .function("getNumTuples", &WebQueryResult::getNumTuples);
-        //         .function("getNext", &WebQueryResult::getNext)
+        // .class_function("convertValueToJsObject", &WebQueryResult::convertValueToJsObject)
+        // .function("getNext", &WebQueryResult::getNext)
 
 }
 

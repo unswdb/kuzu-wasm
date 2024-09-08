@@ -3,9 +3,6 @@
 #include <memory>
 #include <vector>
 
-// #include "arrow_array.h"
-// #include "common/arrow/arrow.h"
-#include "common/types/internal_id_t.h"
 #include "main/kuzu.h"
 #include <emscripten/val.h>
 
@@ -18,7 +15,6 @@ class WebQueryResult {
 public:
 
     WebQueryResult() = default;
-    ~WebQueryResult() = default;
 
     bool hasNext();
 
@@ -26,9 +22,14 @@ public:
 
     void close();
 
-    static val convertValueToJsObject(const kuzu::common::Value& value);
+    ~WebQueryResult();
+
+    // static val convertValueToJsObject(const kuzu::common::Value& value);
 
     // std::string toSingleQueryString();
+    bool hasNextQueryResult();
+
+    std::unique_ptr<WebQueryResult> getNextQueryResult();
 
     std::string toString();
 
@@ -60,4 +61,5 @@ private:
     std::unique_ptr<ArrowSchema> resultSchema;
 
     std::unique_ptr<ArrowArray> resultArray;
+
 };

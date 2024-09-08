@@ -39,8 +39,8 @@ if $emscripten;then
         -C build/${MODE} \
         EMCC_CFLAGS="-Wno-c++11-narrowing"\
         -j${CORES} 
-    mkdir -p packages/kuzu-wasm/dist
-    cp build/${MODE}/kuzu-wasm.* packages/kuzu-wasm/dist/
+    # mkdir -p packages/kuzu-wasm/dist
+    # cp build/${MODE}/kuzu-wasm.* packages/kuzu-wasm/dist/
 else
     #build for native
 	cd kuzu && \

@@ -2,24 +2,23 @@
 
 #include <utility>
 
-// #include "common/constants.h"
-// #include "common/string_format.h"
-// #include "common/types/uuid.h"
 #include "main/connection.h"
-// #include "pandas/pandas_scan.h"
-// #include "processor/result/factorized_table.h"
 
 using namespace kuzu::common;
 using namespace kuzu;
 
+// Tod do: create_function(UDF)
 
 WebConnection::WebConnection(WebDatabase* WebDatabase, uint64_t numThreads) {
     storageDriver = std::make_unique<kuzu::main::StorageDriver>(WebDatabase->database.get());
     conn = std::make_unique<Connection>(WebDatabase->database.get());
-    // conn->getClientContext()->addScanReplace(function::ScanReplacement(kuzu::replacePD));
     if (numThreads > 0) {
         conn->setMaxNumThreadForExec(numThreads);
     }
+}
+
+void WebConnection::close() {
+    conn.reset();
 }
 
 void WebConnection::setQueryTimeout(uint64_t timeoutInMS) {
@@ -35,6 +34,7 @@ std::unique_ptr<WebQueryResult> WebConnection::query(std::string queryStatement)
 
 std::unique_ptr<WebQueryResult> WebConnection::execute(
     WebPreparedStatement* preparedStatement) {
+    // add parameters functionality
     // auto parameters = transformPythonParameters(params, conn.get());
     std::unordered_map<std::string, std::unique_ptr<Value>> parameters;
     auto queryResult =conn->executeWithParams(preparedStatement->preparedStatement.get(), std::move(parameters));

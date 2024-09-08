@@ -9,9 +9,6 @@ class WebDatabase {
     friend class WebConnection;
 
 public:
-    inline void setLoggingLevel(std::string logging_level) {
-        database->setLoggingLevel(std::move(logging_level));
-    }
 
     static std::string getVersion();
 
@@ -21,7 +18,7 @@ public:
         uint64_t maxNumThreads, bool compression, bool readOnly, uint64_t maxDBSize);
 
     ~WebDatabase();
-
+    void close();
 private:
     std::unique_ptr<Database> database;
     std::unique_ptr<StorageDriver> storageDriver;

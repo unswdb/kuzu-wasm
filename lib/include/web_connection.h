@@ -11,6 +11,8 @@ public:
 
     explicit WebConnection(WebDatabase* WebDatabase, uint64_t numThreads);
 
+    void close();
+    
     ~WebConnection() = default;
 
     void setQueryTimeout(uint64_t timeoutInMS);
