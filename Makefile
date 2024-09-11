@@ -1,13 +1,13 @@
 .DEFAULT_GOAL := help
 SOURCE_FILES := $(shell find . -name '*.cpp' -o -name '*.h') CMakeLists.txt
 
-check-patch: ## Patch files
+kuzu/patched: ## Patch files
 	@cd kuzu && \
 	if git apply --check ../patches/*.patch > /dev/null 2>&1; then \
 		echo "Applying patches..."; \
 		git apply ../patches/*.patch; \
 	fi
-	touch check-patch
+	touch kuzu/patched
 
 .PHONY: check_environment
 check_environment: ## check_environment
@@ -17,19 +17,19 @@ check_environment: ## check_environment
 
 .PHONY: wasm_dev 
 wasm_dev_target = build/dev/kuzu-wasm.wasm 
-$(wasm_dev_target): $(SOURCE_FILES) check-patch
+$(wasm_dev_target): $(SOURCE_FILES) kuzu/patched
 	./scripts/build_wasm.sh dev
 wasm_dev: $(wasm_dev_target) ## Compile kuzu-wasm in development mode
 
 .PHONY: wasm_relsize 
 wasm_relsize_target := build/relsize/kuzu-wasm.wasm
-$(wasm_relsize_target):  $(SOURCE_FILES) check-patch
+$(wasm_relsize_target):  $(SOURCE_FILES) kuzu/patched
 	./scripts/build_wasm.sh relsize
 wasm_relsize: $(wasm_relsize_target) ## Compile kuzu-wasm in development mode
 
 .PHONY: wasm_relperf
 wasm_relperf_target := build/relperf/kuzu-wasm.wasm 
-$(wasm_relperf_target): $(SOURCE_FILES) check-patch
+$(wasm_relperf_target): $(SOURCE_FILES) kuzu/patched
 	./scripts/build_wasm.sh relperf
 wasm_relperf: $(wasm_relperf_target) ## Compile kuzu-wasm in relperf mode
 
@@ -68,7 +68,8 @@ clean:  ## Clean the repository
 	rm -rf build
 	rm -rf kuzu/build
 	rm -rf packages/*/node_modules
-	rm -rf packages/*/build
+	rm -rf node_modules
+	rm -rf packages/*/dist
 
 .PHONY: help
 help:  ## Display this help information
