@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dylanshang/kuzu-wasm/main/misc/logo.png" height="100">
+  <img src="https://raw.githubusercontent.com/unswdb/kuzu-wasm/main/misc/logo.png" height="100">
   <h1>Kùzu-Wasm</h1>
 </div>
 
@@ -7,8 +7,8 @@
   <a href="https://www.npmjs.com/package/@kuzu/kuzu-wasm/v/latest">
     <img src="https://img.shields.io/npm/v/@kuzu/kuzu-wasm?logo=npm" alt="kuzu-wasm package on NPM">
   </a>
-  <a href="https://github.com/dylanshang/kuzu-wasm/actions">
-    <img src="https://github.com/dylanshang/kuzu-wasm/actions/workflows/shell.yml/badge.svg?branch=main" alt="Github Actions Badge">
+  <a href="https://github.com/unswdb/kuzu-wasm/actions">
+    <img src="https://github.com/unswdb/kuzu-wasm/actions/workflows/shell.yml/badge.svg?branch=main" alt="Github Actions Badge">
   </a>
 </div>
 <h1></h1>
@@ -22,7 +22,7 @@ Try it out at [kuzu-shell.netlify.app](https://kuzu-shell.netlify.app).
 
 ## Build from source
 ```shell
-git clone https://github.com/DylanShang/kuzu-wasm.git --recursive
+git clone https://github.com/unswdb/kuzu-wasm.git --recursive
 make
 ```
 

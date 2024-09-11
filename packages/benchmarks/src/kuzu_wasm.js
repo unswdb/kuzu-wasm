@@ -26,16 +26,17 @@ async function initializeWasmConnection() {
       const content = await fs.readFile(filePath, 'utf8');
       const targetFilePath = path.join(targetDir, file);
       kuzu.FS.writeFile(targetFilePath, content);
-      // console.log(`File ${file} copied to ${targetFilePath}`);
+      console.log(`File ${file} copied to ${targetFilePath}`);
     }
   } catch (err) {
     console.error('Error reading directory:', err);
   }
 
-  const db = new kuzu.WebDatabase("memDB", 0, 0, false, false, 4194304 * 16 * 4);
+  const db = new kuzu.WebDatabase("memDB", 0, 0, false, false, 4194304 * 16 * 8);
   const conn = new kuzu.WebConnection(db, 0);
 
   for (const query of importQueries) {
+    console.log("kuzu-wasm:" + query)
     await conn.query(query);
   }
   

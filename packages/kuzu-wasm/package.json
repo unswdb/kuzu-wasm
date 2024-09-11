@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DylanShang/kuzu-wasm"
+    "url": "https://github.com/unswdb/kuzu-wasm"
   },
   "description": "Kuzu GraphDB powered by WebAssembly",
   "main": "dist/kuzu-wasm.js",

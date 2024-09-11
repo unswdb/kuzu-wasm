@@ -1,13 +1,13 @@
 .DEFAULT_GOAL := help
 SOURCE_FILES := $(shell find . -name '*.cpp' -o -name '*.h') CMakeLists.txt
 
-.PHONY: check-patch
 check-patch: ## Patch files
 	@cd kuzu && \
 	if git apply --check ../patches/*.patch > /dev/null 2>&1; then \
 		echo "Applying patches..."; \
 		git apply ../patches/*.patch; \
 	fi
+	touch check-patch
 
 .PHONY: check_environment
 check_environment: ## check_environment

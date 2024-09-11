@@ -29,10 +29,11 @@ const Shell = () => {
   }
 
   const keywordList = ["CALL", "CREATE", "DELETE", "DETACH", "EXISTS", "FOREACH", "LOAD", "MATCH", "MERGE", "OPTIONAL", "REMOVE", "RETURN", "SET", "START", "UNION", "UNWIND", "WITH", "LIMIT", "ORDER", "SKIP", "WHERE", "YIELD", "ASC", "ASCENDING", "ASSERT", "BY", "CSV", "DESC", "DESCENDING", "ON", "ALL", "CASE", "ELSE", "END", "THEN", "WHEN", "AND", "AS", "REL", "TABLE", "CONTAINS", "DISTINCT", "ENDS", "IN", "IS", "NOT", "OR", "STARTS", "XOR", "CONSTRAINT", "DROP", "EXISTS", "INDEX", "NODE", "KEY", "UNIQUE", "INDEX", "JOIN", "PERIODIC", "COMMIT", "SCAN", "USING", "FALSE", "NULL", "TRUE", "ADD", "DO", "FOR", "MANDATORY", "OF", "REQUIRE", "SCALAR", "EXPLAIN", "PROFILE", "HEADERS", "FROM", "FIELDTERMINATOR", "STAR", "MINUS", "COUNT", "PRIMARY", "COPY", "RDFGRAPH", "ALTER", "RENAME", "COMMENT", "MACRO", "GLOB", "COLUMN", "GROUP", "DEFAULT", "TO", "BEGIN", "TRANSACTION", "READ", "ONLY", "WRITE", "COMMIT_SKIP_CHECKPOINT", "ROLLBACK", "ROLLBACK_SKIP_CHECKPOINT", "INSTALL", "EXTENSION", "SHORTEST", "ATTACH", "IMPORT", "EXPORT", "USE"]
-  const startHint = (kuzuTerm) => {
+  const startHint = (kuzuTerm,dbVersion,storageVersion) => {
     kuzuTerm.writeln('Welcome to the Kuzu Shell!');
-    kuzuTerm.writeln('Database: v0.0.1');
-    kuzuTerm.writeln('Package:  @kuzu/kuzu-wasm');
+    kuzuTerm.writeln('Database: v'+dbVersion);
+    kuzuTerm.writeln('Storage : v'+storageVersion);
+    kuzuTerm.writeln('Package : @kuzu/kuzu-wasm');
     kuzuTerm.writeln('\n\rConnected to a local transient in-memory database.');
     kuzuTerm.writeln('Enter help for usage hints.\n\r');
   }
@@ -48,7 +49,7 @@ const Shell = () => {
     kuzuTerm.writeln('examples              Example queries.');
     kuzuTerm.writeln('');
     kuzuTerm.writeln('Repositories:');
-    kuzuTerm.writeln('\thttps://github.com/DylanShang/kuzu-wasm');
+    kuzuTerm.writeln('\thttps://github.com/unswdb/kuzu-wasm');
   }
 
   const examplesHint = (kuzuTerm) => {
@@ -113,7 +114,9 @@ const Shell = () => {
           database = new module.WebDatabase("test", 0, 1, false, false, 4194304 * 16 * 4)
           connection = new module.WebConnection(database, 0)
           kuzuTerm.clear();
-          startHint(kuzuTerm);
+          const storageVersion = kuzu.WebDatabase.getStorageVersion();
+          const dbVersion = kuzu.WebDatabase.getVersion();
+          startHint(kuzuTerm,dbVersion,storageVersion);
           kuzuTerm.prompt();
         })
       } else { kuzuTerm.clear(); kuzuTerm.writeln('Welcome to the Kuzu Shell!'); }
