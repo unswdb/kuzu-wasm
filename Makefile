@@ -51,7 +51,9 @@ package_dev: $(wasm_dev_target) ## Package kuzu-wasm
 
 .PHONY: shell 
 shell: package ## Build kuzu-shell application
+	ls packages/kuzu-wasm/dist
 	yarn workspace @kuzu/kuzu-shell build:release
+	ls packages/kuzu-shell/dist
 
 .PHONY: shell_dev 
 shell_dev:  ## Start kuzu-shell in development mode
