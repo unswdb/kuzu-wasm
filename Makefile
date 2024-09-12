@@ -33,20 +33,23 @@ $(wasm_relperf_target): $(SOURCE_FILES) kuzu/patched
 	./scripts/build_wasm.sh relperf
 wasm_relperf: $(wasm_relperf_target) ## Compile kuzu-wasm in relperf mode
 
+node_modules:
+	yarn install
+	rm -rf packages/*/node_modules
+
+
 .PHONY: package
-package: $(wasm_relperf_target) ## Package kuzu-wasm
+package: $(wasm_relperf_target) node_modules ## Package kuzu-wasm
 	mkdir -p packages/kuzu-wasm/dist
 	cp build/relperf/kuzu-wasm.* packages/kuzu-wasm/dist/
 	cp README.md packages/kuzu-wasm/
 	cp LICENSE.txt packages/kuzu-wasm/
-	if [ ! -d "node_modules" ]; then yarn install; fi
 	yarn workspace @kuzu/kuzu-wasm release
 
 .PHONY: package_dev
-package_dev: $(wasm_dev_target) ## Package kuzu-wasm
+package_dev: $(wasm_dev_target) node_modules ## Package kuzu-wasm
 	mkdir -p packages/kuzu-wasm/dist
 	cp build/dev/kuzu-wasm.* packages/kuzu-wasm/dist/
-	if [ ! -d "node_modules" ]; then yarn install; fi
 	yarn workspace @kuzu/kuzu-wasm debug
 
 .PHONY: shell 
