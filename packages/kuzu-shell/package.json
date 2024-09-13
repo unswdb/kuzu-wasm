@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "test": "webpack serve",
-    "start": "rm -rf node_modules && webpack serve --config webpack.debug.js",
-    "build:debug": "rm -rf node_modules && NODE_OPTIONS='--max-old-space-size=4096' webpack --config webpack.debug.js",
-    "build:release": "rm -rf node_modules && NODE_OPTIONS='--max-old-space-size=4096' webpack --config webpack.release.js && cp public/cors/netlify.toml dist/",
+    "start": "webpack serve --config webpack.debug.js",
+    "build:debug": "NODE_OPTIONS='--max-old-space-size=4096' webpack --config webpack.debug.js",
+    "build:release": "NODE_OPTIONS='--max-old-space-size=4096' webpack --config webpack.release.js && cp public/cors/netlify.toml dist/",
     "analyze:debug": "webpack --config webpack.debug.js --analyze",
     "analyze:release": "webpack --config webpack.release.js --analyze",
     "lint": "eslint src"

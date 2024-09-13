@@ -20,8 +20,10 @@ const conn = new kuzu.Connection(db);
 
 async function setup() {
   for (const query of importQueries) {
+    console.log("kuzu-node:" + query);
     await conn.query(query);
   }
+  return conn;
 }
 
 function afterAll(){
@@ -30,4 +32,4 @@ function afterAll(){
 }
 
 const conn_node_promise = setup();
-module.exports = { conn, version, afterAll};
+module.exports = { conn_node_promise, version, afterAll};

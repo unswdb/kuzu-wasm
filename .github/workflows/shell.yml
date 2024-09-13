@@ -33,6 +33,16 @@ jobs:
     - name: Build Shell Project
       run: |
         make shell
+    - name: Run Benchmark
+      run: |
+        make benchmark
+
+    - name: Upload Benchmark Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-report
+        path: packages/benchmarks/benchmark_report.md
+
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0
       with:

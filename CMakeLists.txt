@@ -69,6 +69,7 @@ set_target_properties(
     -sNO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../../kuzu/dataset/demo-db/ \
     -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
+    -s EXPORTED_FUNCTIONS='[\"__emscripten_thread_crashed\",\"__embind_initialize_bindings\"]' \
     ")
 
     # --post-js ${CMAKE_SOURCE_DIR}/lib/postfix_module.js \

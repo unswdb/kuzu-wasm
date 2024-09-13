@@ -15,9 +15,9 @@ const systeminfo = require('./system/info');
 
     try {
         console.log("Awaiting connections...");
-        conn_node = kuzu_node.conn;
+        conn_node = await kuzu_node.conn_node_promise;
         conn_wasm = await conn_wasm_promise;
-        console.log("Connections established:");
+        console.log("Connections established.");
     } catch (error) {
         console.error('Failed to initialize connections:', error);
         return; // Exit the async function if initialization fails
@@ -34,9 +34,12 @@ const systeminfo = require('./system/info');
             queryText: query.query
         });
 
+        console.log("Running benchmark for query: " + query.name+ ", " + query.query);
         bench.add("kuzu-wasm", async function () {
+            // console.log("Running kuzu-wasm");
             await conn_wasm.query(query.query);
         }).add("kuzu-node", async function () {
+            // console.log("Running kuzu-node");
             await conn_node.query(query.query);
         });
         // .add("Neo4j", async function () {
