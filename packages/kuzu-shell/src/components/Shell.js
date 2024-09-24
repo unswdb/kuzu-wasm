@@ -64,10 +64,10 @@ const Shell = () => {
     kuzuTerm.writeln('CREATE REL TABLE LivesIn(FROM User TO City)');
     kuzuTerm.writeln('');
     kuzuTerm.writeln('#Insert data');
-    kuzuTerm.writeln('COPY User FROM "kuzu/dataset/demo-db/csv/user.csv"');
-    kuzuTerm.writeln('COPY City FROM "kuzu/dataset/demo-db/csv/city.csv"');
-    kuzuTerm.writeln('COPY Follows FROM "kuzu/dataset/demo-db/csv/follows.csv"');
-    kuzuTerm.writeln('COPY LivesIn FROM "kuzu/dataset/demo-db/csv/lives-in.csv"');
+    kuzuTerm.writeln('COPY User FROM "/demo-db/csv/user.csv"');
+    kuzuTerm.writeln('COPY City FROM "/demo-db/csv/city.csv"');
+    kuzuTerm.writeln('COPY Follows FROM "/demo-db/csv/follows.csv"');
+    kuzuTerm.writeln('COPY LivesIn FROM "/demo-db/csv/lives-in.csv"');
     kuzuTerm.writeln('');
     kuzuTerm.writeln('#Cypher query');
     kuzuTerm.writeln('MATCH (a:User)-[f:Follows]->(b:User)RETURN a.name, b.name, f.since');

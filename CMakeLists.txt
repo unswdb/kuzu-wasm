@@ -62,12 +62,12 @@ set_target_properties(
     -s WARN_ON_UNDEFINED_SYMBOLS=0 \
     -s PTHREAD_POOL_SIZE=4 \
     -mbulk-memory -DWEBDB_BULK_MEMORY=1 \
-    -sWASM_BIGINT \
+    -s WASM_BIGINT \
     -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
     -lembind \
     -s MODULARIZE=1 -s EXPORT_NAME='kuzu_wasm' \
-    -sNO_DISABLE_EXCEPTION_CATCHING \
-    --embed-file ../../kuzu/dataset/demo-db/ \
+    -s NO_DISABLE_EXCEPTION_CATCHING \
+    --embed-file ../../data/embeddings@/ \
     -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
     -s EXPORTED_FUNCTIONS='[\"__emscripten_thread_crashed\",\"__embind_initialize_bindings\"]' \
     ")
