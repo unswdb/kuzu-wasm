@@ -4,8 +4,8 @@ FROM emscripten/emsdk:latest
 # Set maintainer information
 LABEL maintainer="lantu.april@gmail.com"
 
-# Copy the current directory contents into the container at /kuzu-wasm
-COPY . /kuzu-wasm
+# Download kuzu-wasm
+RUN cd / && git clone https://github.com/unswdb/kuzu-wasm.git --recursive
 
 # Install the necessary packages
 RUN apt-get update && \
