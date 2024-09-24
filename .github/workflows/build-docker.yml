@@ -13,6 +13,8 @@ jobs:
       # Checkout code from repository
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
 
       # Set up QEMU for multi-arch builds
       - name: Set up QEMU
