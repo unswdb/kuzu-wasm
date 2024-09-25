@@ -39,6 +39,3 @@ jobs:
           tags: |
             dylanshang/kuzu-wasm:latest
             dylanshang/kuzu-wasm:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          github-token: ${{ secrets.GITHUB_TOKEN }}
