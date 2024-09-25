@@ -68,7 +68,7 @@ set_target_properties(
     -s MODULARIZE=1 -s EXPORT_NAME='kuzu_wasm' \
     -s NO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../../data/embeddings@/ \
-    -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
+    -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"stackSave\", \"wasmMemory\",\"stackAlloc\", \"stackRestore\",\"FS\",\"UTF8ToString\"]' \
     -s EXPORTED_FUNCTIONS='[\"__emscripten_thread_crashed\",\"__embind_initialize_bindings\"]' \
     ")
 
