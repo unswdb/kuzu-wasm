@@ -1,0 +1,16 @@
+{
+  "name": "kuzu-wasm-docs",
+  "version": "1.0.0",
+  "description": "WebAssembly version of Kùzu database",
+  "repository": "https://github.com/unswdb/kuzu-wasm",
+  "author": "DylanShang",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.3.4"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  }
+}

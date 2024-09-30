@@ -1228,7 +1228,7 @@
   integrity sha512-Cebt4Vk7k1xHy87kHY7KSPLT77A7Ev7IfOblyLZhtYEhrdQ6fX4EoLq3xOQ3O/DRMEh2ok5nyC180E+ABS8Wmw==
 
 "@kuzu/kuzu-wasm@file:packages/kuzu-wasm":
-  version "1.0.5"
+  version "0.6.0"
   dependencies:
     apache-arrow "^16.1.0"
 
