@@ -27,7 +27,7 @@ if $emscripten;then
     mv build/${MODE}/kuzu-wasm.js build/${MODE}/kuzu-wasm.esm.js &&
     sed -i.bak 's/kuzu-wasm\.js/kuzu-wasm\.esm\.js/g' build/${MODE}/kuzu-wasm.esm.js &&
     # fix problem in https://github.com/emscripten-core/emscripten/issues/22654
-    sed -i.bak 's|worker=new Worker(new URL("kuzu-wasm\.esm\.js",import.meta\.url),workerOptions);PThread\.unusedWorkers\.push(worker)|fetch(new URL('\''kuzu-wasm.esm.js'\'', import.meta.url)).then(response => response.text()).then(scriptText => { const workerUrl = URL.createObjectURL(new Blob([scriptText], { type: '\''application/javascript'\'' }));worker = new Worker(workerUrl, workerOptions); PThread.unusedWorkers.push(worker); }).catch(console.error);|' build/${MODE}/kuzu-wasm.esm.js &&
+    sed -i.bak 's|worker=new Worker(new URL("kuzu-wasm\.esm\.js",import.meta\.url),workerOptions);PThread\.unusedWorkers\.push(worker)|try { var xhr = new XMLHttpRequest(); xhr.open("GET", new URL('\''kuzu-wasm.esm.js'\'', import.meta.url), false); xhr.send(null); if (xhr.status === 200) { const scriptText = xhr.responseText; const workerUrl = URL.createObjectURL(new Blob([scriptText], { type: '\''application/javascript'\'' })); PThread.unusedWorkers.push(new Worker(workerUrl, workerOptions)); } } catch (error) { console.error("Error allocating worker:", error); }|' build/${MODE}/kuzu-wasm.esm.js &&
     rm "build/${MODE}/kuzu-wasm.esm.js.bak" &&
     #build for node
     emcmake cmake \
