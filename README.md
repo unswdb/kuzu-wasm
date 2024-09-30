@@ -10,14 +10,10 @@
   <a href="https://github.com/unswdb/kuzu-wasm/actions">
     <img src="https://github.com/unswdb/kuzu-wasm/actions/workflows/shell.yml/badge.svg?branch=main" alt="Github Actions Badge">
   </a>
-    <a href="https://github.com/unswdb/kuzu-wasm/actions">
+    <a href="https://hub.docker.com/r/dylanshang/kuzu-wasm">
     <img src="https://img.shields.io/docker/image-size/dylanshang/kuzu-wasm?logo=Docker" alt="Docker Badge">
   </a>
-    </a>
-    <a href="https://github.com/unswdb/kuzu-wasm/actions">
-    <img src="https://img.shields.io/pypi/v/kuzu-wasm?color=green
-    " alt="Docker Badge">
-  </a>
+
 </div>
 <h1></h1>
 
