@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuzu WASM Example</title>
+    <script type="module">
+        import kuzu_wasm from 'https://unpkg.com/@kuzu/kuzu-wasm@latest/dist/kuzu-browser.js';
+
+        (async () => {
+            const kuzu = await kuzu_wasm();
+            window.kuzu = kuzu
+            const db = await kuzu.Database()
+            const conn = await kuzu.Connection(db)
+            await conn.execute(`CREATE NODE TABLE User(name STRING, age INT64, PRIMARY KEY (name))`)
+            await conn.execute(`CREATE (u:User {name: 'Alice', age: 35});`)
+            const res = await conn.execute(`MATCH (a:User) RETURN a.*;`)
+            const res_json = JSON.parse(res.table.toString());
+            console.log(res_json)
+        })();
+    </script>
+</head>
+<body>
+    <h1>Kuzu WASM Example</h1>
+</body>
+</html>

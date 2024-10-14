@@ -27,10 +27,13 @@ export default defineConfig({
               ]
             },
             {
-              text: 'Import data',
+              text: 'Data Ingestion',
               collapsed: false,
               items: [
-                { text: 'Updating...', link: '' },
+                { text: 'Overview', link: 'data-ingestion-overview' },
+                { text: 'Writing to File', link: 'writing-to-file' },
+                { text: 'Fetch from network', link: 'fetch-from-network' },
+                { text: 'Build with Docker', link: 'build-with-docker' },
               ]
             }
           ]
