@@ -1,0 +1,15 @@
+{
+    "private": true,
+    "name": "kuzu-wasm-examples-bare-browser",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "@kuzu/kuzu-wasm": "file:../../packages/kuzu-wasm"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+        "build": "node ./bundle.mjs"
+    }
+}
