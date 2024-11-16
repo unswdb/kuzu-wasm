@@ -11,7 +11,7 @@ docker run --rm \
   /bin/bash -c "make package"
 ```
 
-## Limitations:
+## Limitations
 While embedding files at build time offers simplicity for static data, it has certain limitations:
 - Inflexibility: Completed at the compile stage and suitable for static data scenarios
 - Larger Build Size: Not suitable for large file, which will significantly increase the size of the WASM file
