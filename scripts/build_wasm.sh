@@ -18,7 +18,7 @@ if $emscripten;then
     #build for esm
     emcmake cmake \
         -B build/${MODE} \
-        ${ADDITIONAL_FLAGS} -DWASM_WEB=1 &&
+        ${ADDITIONAL_FLAGS} -DWASM_WEB=1 -DBUILD_WASM=TRUE -DBUILD_BENCHMARK=FALSE -DBUILD_SHELL=FALSE &&
     emmake make \
         -C build/${MODE} \
         EMCC_CFLAGS="-Wno-c++11-narrowing"\
@@ -32,7 +32,7 @@ if $emscripten;then
     #build for node
     emcmake cmake \
         -B build/${MODE} \
-        ${ADDITIONAL_FLAGS} -DWASM_WEB=0 &&
+        ${ADDITIONAL_FLAGS} -DWASM_WEB=0 -DBUILD_WASM=TRUE -DBUILD_BENCHMARK=FALSE -DBUILD_SHELL=FALSE &&
     emmake make \
         -C build/${MODE} \
         EMCC_CFLAGS="-Wno-c++11-narrowing"\

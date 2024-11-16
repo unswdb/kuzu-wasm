@@ -1,6 +1,6 @@
 {
   "name": "@kuzu/kuzu-wasm",
-  "version": "0.6.2-dev",
+  "version": "0.7.0",
   "author": "DylanShang",
   "license": "MIT",
   "repository": {

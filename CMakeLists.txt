@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
-project(KUZU-WASM VERSION 0.6.0.5)
+project(KUZU-WASM VERSION 0.7.0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s DISABLE_EXCEPTION_CATCHING=0")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s DISABLE_EXCEPTION_CATCHING=0")
 
 if (EMSCRIPTEN)
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
@@ -60,11 +60,12 @@ set_target_properties(
     -s MAXIMUM_MEMORY=4GB \
     -s ALLOW_BLOCKING_ON_MAIN_THREAD=1 \
     -s WARN_ON_UNDEFINED_SYMBOLS=0 \
-    -s PTHREAD_POOL_SIZE=4 \
+    -s PTHREAD_POOL_SIZE=8 \
     -mbulk-memory -DWEBDB_BULK_MEMORY=1 \
     -s WASM_BIGINT \
     -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
     -lembind \
+    -lidbfs.js \
     -s MODULARIZE=1 -s EXPORT_NAME='kuzu_wasm' \
     -s NO_DISABLE_EXCEPTION_CATCHING \
     --embed-file ../../data/embeddings@/ \
