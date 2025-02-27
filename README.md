@@ -1,7 +1,6 @@
- <div>
-  This project has been archived. The latest official version can be found at
-  <a href="https://docs.kuzudb.com/client-apis/wasm">Kùzu WASM Page</a> (Kùzu Team)
-</div>
+
+> This project has been archived. The latest official version can be found at <a href="https://docs.kuzudb.com/client-apis/wasm">Kùzu WASM Page</a> (Kùzu Team)
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/unswdb/kuzu-wasm/main/misc/logo.png" height="100">
   <h1>Kùzu-Wasm</h1>
