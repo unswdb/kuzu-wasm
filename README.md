@@ -1,8 +1,8 @@
 
-> This project has been archived. The latest official version can be found at <a href="https://docs.kuzudb.com/client-apis/wasm">Kùzu WASM Page</a> (Kùzu Team)
+> This project has been archived because it is no longer maintained. The latest official version can be found at <a href="https://docs.kuzudb.com/client-apis/wasm">Kùzu WASM Page</a> (Kùzu Team)
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/unswdb/kuzu-wasm/main/misc/logo.png" height="100">
+  <!-- <img src="https://raw.githubusercontent.com/unswdb/kuzu-wasm/main/misc/logo.png" height="100"> -->
   <h1>Kùzu-Wasm</h1>
 </div>
 
@@ -10,9 +10,12 @@
   <a href="https://www.npmjs.com/package/@kuzu/kuzu-wasm/v/latest">
     <img src="https://img.shields.io/npm/v/@kuzu/kuzu-wasm?logo=npm" alt="kuzu-wasm package on NPM">
   </a>
-  <a href="https://github.com/unswdb/kuzu-wasm/actions">
+  <!-- <a href="https://github.com/unswdb/kuzu-wasm/actions">
     <img src="https://github.com/unswdb/kuzu-wasm/actions/workflows/shell.yml/badge.svg?branch=main" alt="Github Actions Badge">
-  </a>
+  </a> -->
+    <a href="https://github.com/unswdb/kuzu-wasm">
+    <img src="https://img.shields.io/badge/status-archived-inactive">
+    </a>
     <a href="https://hub.docker.com/r/dylanshang/kuzu-wasm">
     <img src="https://img.shields.io/docker/image-size/dylanshang/kuzu-wasm?logo=Docker" alt="Docker Badge">
   </a>
